@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CURR_MAJOR=$(fly --version | awk 'BEGIN {FS="."} {print $1}')
+CURR_VERSION=$(fly --version)
+FLY_DIRECTORY="/usr/local/bin"
+
+echo "Fly is currently version `fly --version`, let's fix that real quick....."
+
+if [[ "$CURR_MAJOR" -eq 5 ]]; then
+  ln -sf "$FLY_DIRECTORY/fly_6" "$FLY_DIRECTORY/fly"
+else
+  ln -sf "$FLY_DIRECTORY/fly_5" "$FLY_DIRECTORY/fly"
+fi
+
+echo "Congrats! Your FLY $CURR_VERSION has evolved into FLY $(fly --version)"
